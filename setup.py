@@ -18,7 +18,7 @@ setup(
         'Programming Language :: Python',
         'Topic :: Text Processing :: General'
     ],
-    url='http://github.com/samcb',
+    url='https://github.com/SamCB/Emoji2Text',
     author='Sam CB',
     author_email='s.cbird01@gmail.com',
     license='MIT',
