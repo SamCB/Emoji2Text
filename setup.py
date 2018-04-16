@@ -1,8 +1,15 @@
 from setuptools import setup
+import unittest
 
 def readme():
     with open('README.md') as f:
         return f.read()
+
+# from https://stackoverflow.com/a/37033551
+def my_test_suite():
+    test_loader = unittest.TestLoader()
+    test_suite = test_loader.discover('emoji2text/tests', pattern='test_*.py')
+    return test_suite
 
 setup(
     name='emoji2text',
@@ -23,5 +30,6 @@ setup(
     author_email='s.cbird01@gmail.com',
     license='MIT',
     packages=['emoji2text'],
+    test_suite='setup.my_test_suite',
     zip_safe=False
 )

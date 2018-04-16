@@ -1,5 +1,8 @@
 from unittest import TestCase
 import re
+from os import path
+
+EMOJI_FILE = path.join(path.dirname(__file__), '../emoji-test.txt')
 
 import emoji2text
 
@@ -13,7 +16,7 @@ TEST_TARGETS = [
 
 class TestParse(TestCase):
     def test_converts_all_emoji(self):
-        with open('../emoji-test.txt') as f:
+        with open(EMOJI_FILE) as f:
             # Use the document we use for building our converter.
             #  it contains every emoji
             emoji_test = f.read()
@@ -41,29 +44,29 @@ class TestParse(TestCase):
 
     def test_default_wrap(self):
         result = emoji2text.emoji2text(
-            ''.join('Foo ', TEST_TARGETS[0][0], 'bar', TEST_TARGETS[1][0], TEST_TARGETS[2][0], 'baz')
+            ''.join(['Foo ', TEST_TARGETS[0][0], 'bar', TEST_TARGETS[1][0], TEST_TARGETS[2][0], 'baz'])
         )
         self.assertEqual(
             result,
-            ''.join('Foo ', TEST_TARGETS[0][1], 'bar', TEST_TARGETS[1][1], TEST_TARGETS[2][1], 'baz')
+            ''.join(['Foo ', TEST_TARGETS[0][1], 'bar', TEST_TARGETS[1][1], TEST_TARGETS[2][1], 'baz'])
         )
 
     def test_adds_wrap_properly(self):
         result = emoji2text.emoji2text(
-            ''.join('Foo ', TEST_TARGETS[0][0], 'bar', TEST_TARGETS[1][0], TEST_TARGETS[2][0], 'baz'),
+            ''.join(['Foo ', TEST_TARGETS[0][0], 'bar', TEST_TARGETS[1][0], TEST_TARGETS[2][0], 'baz']),
             ':'
         )
         self.assertEqual(
             result,
-            ''.join('Foo :', TEST_TARGETS[0][1], ':bar:', TEST_TARGETS[1][1], '::', TEST_TARGETS[2][1], ':baz')
+            ''.join(['Foo :', TEST_TARGETS[0][1], ':bar:', TEST_TARGETS[1][1], '::', TEST_TARGETS[2][1], ':baz'])
         )
 
     def test_adds_double_wrap_properly(self):
         result = emoji2text.emoji2text(
-            ''.join('Foo ', TEST_TARGETS[0][0], 'bar', TEST_TARGETS[1][0], TEST_TARGETS[2][0], 'baz'),
+            ''.join(['Foo ', TEST_TARGETS[0][0], 'bar', TEST_TARGETS[1][0], TEST_TARGETS[2][0], 'baz']),
             '<', '>'
         )
         self.assertEqual(
             result,
-            ''.join('Foo <', TEST_TARGETS[0][1], '>bar<', TEST_TARGETS[1][1], '><', TEST_TARGETS[2][1], '>baz')
+            ''.join(['Foo <', TEST_TARGETS[0][1], '>bar<', TEST_TARGETS[1][1], '><', TEST_TARGETS[2][1], '>baz'])
         )

@@ -1,1 +1,1 @@
-from parse import emoji2text
+from .parse import emoji2text
