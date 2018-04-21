@@ -27,6 +27,12 @@ emoji2text("😀😂😂😎", "<", ">")
 # <grinning face><face with tears of joy><face with tears of joy><smiling face with sunglasses>
 ```
 
+To install, use `pip`
+
+```
+pip install emoji2text
+```
+
 Only supports Python 3 and emoji version 5.0 (2017).
 If someone is interested in increasing support I'd be happy to look at any PR.
 
