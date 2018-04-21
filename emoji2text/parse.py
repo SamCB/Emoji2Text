@@ -23,7 +23,7 @@ def init_emoji_conversion(emoji_file=EMOJI_FILE):
             name = grapheme.slice(comparison, start=2)
             yield emoji, name
 
-    with open(EMOJI_FILE) as f:
+    with open(EMOJI_FILE, 'r', encoding='utf-8') as f:
         return {k: v for k, v in generate_pairs(f.readlines())}
 
 DEFAULT_MAPPING = init_emoji_conversion()

@@ -18,7 +18,7 @@ def my_test_suite():
 
 setup(
     name='emoji2text',
-    version='0.1.5',
+    version='0.1.7',
     description='Can\'t handle emoji? Use this to treat them as plain strings, according to the description provided by unicode.',
     long_description=readme(),
     keywords='emoji convert text unicode plain',
