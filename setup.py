@@ -30,6 +30,10 @@ setup(
     author_email='s.cbird01@gmail.com',
     license='MIT',
     packages=['emoji2text'],
+    install_requires=[
+        'grapheme'
+    ],
     test_suite='setup.my_test_suite',
     zip_safe=False
 )
+

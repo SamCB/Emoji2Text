@@ -23,22 +23,27 @@ class TestParse(TestCase):
 
         result = emoji2text.emoji2text(emoji_test, ':')
 
-        for original, update in zip(emoji_test.split('\n'), result.split('\n')):
-            if original.beginswith('#') or len(original) == 0:
+        # Skip the first 3 lines because of some emoji in there we don't want
+        #  to test
+        for original, update in zip(emoji_test.split('\n')[3:], result.split('\n')[3:]):
+            original = original.strip()
+            update = update.strip()
+            if original.startswith('#') or len(original) == 0:
                 self.assertEqual(original, update, "Boring line, should be identical")
+                continue
 
-            original_start, original_end = original.split('#')
-            update_start, update_end = update.split('#')
+            original_start, original_end = original.split('#', 1)
+            update_start, update_end = update.split('#', 1)
 
             self.assertEqual(original_start, update_start, "No emoji here, should be identical")
-
-            f = re.findall(r'(\w.*)', original_end)
+            original_end = original_end.strip()
+            f = re.findall(r'(?<=\s)(\w.*)', original_end)
             self.assertGreater(len(f), 0, 'something went wrong with parsing the original')
 
             original_emoji_name = f[0]
 
             self.assertEqual(
-                update, ' :%: %' % (original_emoji_name, original_emoji_name),
+                update_end, ' :{}: {}'.format(original_emoji_name, original_emoji_name),
                 'Deconvert emoji'
             )
 
